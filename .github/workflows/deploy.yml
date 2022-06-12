@@ -22,7 +22,6 @@ jobs:
           chmod 644 ~/.ssh/known_hosts
       - name: Deliver static
         run: |
-          ssh-keygen -R 45.10.247.13
           scp -i ~/.ssh/key -r ./front neironk@neiron.solutions:~/test
           scp -i ~/.ssh/key -r ./back neironk@neiron.solutions:~/test
           scp -i ~/.ssh/key ./docker-compose ./nginx.conf neironk@neiron.solutions:~/test
