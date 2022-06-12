@@ -18,7 +18,7 @@ export default function Radio() {
                     setCurrentTrack(nextTrack);
                     tracks.unshift(nextTrack);
 
-                    await load(`http://localhost:8000/track/${nextTrack}`);
+                    await load(`${BACKEND_HOST}/track/${nextTrack}`);
                     await play();
                 }}>
                     <svg width="63" height="42" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 25.33c-3.333-1.924-3.333-6.736 0-8.66L24 7.144c3.333-1.925 7.5.48 7.5 4.33v19.052c0 3.85-4.167 6.255-7.5 4.33L7.5 25.33Z" fill="#292929"/><path d="M28.5 25.33c-3.333-1.924-3.333-6.736 0-8.66L45 7.144c3.333-1.925 7.5.48 7.5 4.33v19.052c0 3.85-4.167 6.255-7.5 4.33L28.5 25.33Z" fill="#292929"/></svg>
@@ -31,7 +31,7 @@ export default function Radio() {
                             nextTrack = tracks.shift();
                             setCurrentTrack(nextTrack);
                             tracks.push(nextTrack);
-                            await load(`http://localhost:8000/track/${nextTrack}`);
+                            await load(`${BACKEND_HOST}/track/${nextTrack}`);
                         } else {
                             nextTrack = currentTrack;
                         }
@@ -51,7 +51,7 @@ export default function Radio() {
                     setCurrentTrack(nextTrack);
                     tracks.push(nextTrack);
 
-                    await load(`http://localhost:8000/track/${nextTrack}`);
+                    await load(`${BACKEND_HOST}/track/${nextTrack}`);
                     await play();
                 }}>
                     <svg width="63" height="42" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M55.5 16.67c3.333 1.924 3.333 6.736 0 8.66L39 34.856c-3.333 1.925-7.5-.48-7.5-4.33V11.474c0-3.85 4.167-6.255 7.5-4.33l16.5 9.526Z" fill="#292929"/><path d="M34.5 16.67c3.333 1.924 3.333 6.736 0 8.66L18 34.856c-3.333 1.925-7.5-.48-7.5-4.33V11.474c0-3.85 4.167-6.255 7.5-4.33l16.5 9.526Z" fill="#292929"/></svg>

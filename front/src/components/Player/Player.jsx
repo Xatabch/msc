@@ -6,7 +6,7 @@ import styles from './styles.css';
 import { formatTimeFromSeconds, formatTimeFromMilliseconds } from '../../helpers/time.js';
 
 export default function Player({ track }) {
-    const url = `http://localhost:8000/track/${track}`
+    const url = `${BACKEND_HOST}/track/${track}`
     const { play, pause, isPlay, duration, currentTime } = usePlayer(url);
 
     return (

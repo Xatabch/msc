@@ -4,7 +4,7 @@ export default function useTracks() {
     const [tracks, setTracks] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8000/track-list')
+        fetch(`${BACKEND_HOST}/track-list`)
             .then(response => response.json())
             .then(data => {
                 setTracks(data.tracks);
