@@ -27,6 +27,7 @@ function usePlayer(src) {
     }, [src]);
 
     async function play() {
+        console.log(audio);
         audio.play();
     }
 
