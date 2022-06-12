@@ -1,19 +1,23 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Routes,
   Route
 } from 'react-router-dom';
 
 // Pages
 import Main from './pages/Main/Main.jsx';
+import Upload from './pages/Upload/Upload.jsx';
+import Radio from './pages/Radio/Radio.jsx';
 
 export default function App() {
   return (
-    <Router>
+    <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main/>}/>
+          <Route path="/" element={<Radio />}/>
+          <Route path="/main" element={<Main/>}/>
+          <Route path="upload" element={<Upload/>}/>
         </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }

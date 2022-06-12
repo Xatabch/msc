@@ -26,16 +26,20 @@ function usePlayer(src) {
         }
     }, [src]);
 
-    function play() {
-        console.log(audio);
+    async function play() {
         audio.play();
     }
 
-    function pause() {
-        audio.pause();
+    async function pause() {
+        await audio.pause();
     }
 
-    return { play, pause, isPlay, duration, currentTime };
+    async function load(src) {
+        audio.src = src;
+        await audio.load();
+    }
+
+    return { play, pause, load, isPlay, duration, currentTime };
 }
 
 export default usePlayer;

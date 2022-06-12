@@ -1,0 +1,18 @@
+.radioPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 300px;
+    width: 100%;
+}
+
+.play, .pause, .prev, .next {
+    cursor: pointer;
+}
