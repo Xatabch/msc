@@ -1,0 +1,28 @@
+.player {
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.play, .pause {
+    cursor: pointer;
+}
+
+.trackName {
+    margin: 0;
+    margin-left: 30px;
+}
+
+.progress {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 0 10px;
+}
