@@ -20,3 +20,8 @@ jobs:
           chmod 600 ~/.ssh/key
           ssh-keyscan neiron.solutions >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
+      - name: Deliver static
+        run: |
+          scp -i ~/.ssh/key -r ./front neironk@neiron.solutions:~/msc
+          scp -i ~/.ssh/key -r ./back neironk@neiron.solutions:~/msc
+          scp -i ~/.ssh/key ./docker-compose ./nginx.conf neironk@neiron.solutions:~/msc
