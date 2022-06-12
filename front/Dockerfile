@@ -1,4 +1,7 @@
-FROM nginx
-COPY /app/build/ /app/build
-ADD /nginx/nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80
+FROM node:latest
+WORKDIR /app
+COPY package*.json /app/
+RUN npm install
+ADD ./ /app/
+RUN npm run build
+CMD npm run server

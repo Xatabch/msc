@@ -1,0 +1,22 @@
+name: deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
+      - name: Prepare for deploy
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )
+          eval $(ssh-agent -s)
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/key
+          chmod 600 ~/.ssh/key
+          ssh-keyscan neiron.solutions >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts

@@ -1,6 +1,18 @@
 const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
+const multer = require('multer');
+const storage = multer.diskStorage({
+    filename: function (req, file, cb) {
+        console.log('filename');
+        cb(null, file.originalname);
+    },
+    destination: function (req, file, cb) {
+        console.log('storage');
+        cb(null, './music')
+    }
+});
+const upload = multer({ storage });
 
 const musicFolder = './music';
 
@@ -24,6 +36,11 @@ app.get('/track-list', (req, res) => {
         });
     });
 });
+
+app.post('/upload_files', upload.single('file'), (req, res) => {
+    console.log(req.body, req.file);
+    res.send({ message: 'Succesfully uploaded files' });
+})
 
 app.get('/track/:name', (req, res) => {
     const fileName = req.params.name;
