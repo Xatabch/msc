@@ -28,4 +28,4 @@ jobs:
             mkdir -p ~/.ssh
             echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
             ssh neironk@neiron.solutions 'cd ~/msc && docker-compose down'
-            ssh neironk@neiron.solutions 'cd ~/msc && docker-compose up'
+            ssh neironk@neiron.solutions 'cd ~/msc && docker-compose up -d'
