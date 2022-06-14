@@ -16,8 +16,6 @@ jobs:
             echo "${{ secrets.SSH_PRIVATE_KEY }}" | ssh-add -
             mkdir -p ~/.ssh
             echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-      - name: Deliver static
-        run: |
-          scp -r ./front neironk@neiron.solutions:~/test
-          scp -r ./back neironk@neiron.solutions:~/test
-          scp ./docker-compose ./nginx.conf neironk@neiron.solutions:~/test
+            scp -i ~/ssh/key -r ./front neironk@neiron.solutions:~/test
+            scp -i ~/ssh/key -r ./back neironk@neiron.solutions:~/test
+            scp -i ~/ssh/key ./docker-compose ./nginx.conf neironk@neiron.solutions:~/test
