@@ -12,16 +12,13 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )
+          command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )
           eval $(ssh-agent -s)
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/key
-          chmod 600 ~/.ssh/key
-          ssh-keyscan neiron.solutions >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
       - name: Deliver static
         run: |
-          scp -i ~/.ssh/key -r ./front neironk@neiron.solutions:~/test
-          scp -i ~/.ssh/key -r ./back neironk@neiron.solutions:~/test
-          scp -i ~/.ssh/key ./docker-compose ./nginx.conf neironk@neiron.solutions:~/test
+          scp -r ./front neironk@neiron.solutions:~/test
+          scp -r ./back neironk@neiron.solutions:~/test
+          scp ./docker-compose ./nginx.conf neironk@neiron.solutions:~/test
