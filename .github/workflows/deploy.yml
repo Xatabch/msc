@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v2
-      - name: Prepare for deploy
+      - name: Deliver static
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
@@ -16,6 +16,16 @@ jobs:
             echo "${{ secrets.SSH_PRIVATE_KEY }}" | ssh-add -
             mkdir -p ~/.ssh
             echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-            scp -r ./front neironk@neiron.solutions:~/test
-            scp -r ./back neironk@neiron.solutions:~/test
-            scp ./docker-compose.yml ./nginx.conf neironk@neiron.solutions:~/test
+            scp -r ./front neironk@neiron.solutions:~/msc
+            scp -r ./back neironk@neiron.solutions:~/msc
+            scp ./docker-compose.yml ./nginx.conf neironk@neiron.solutions:~/msc
+      - name: Restart container
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+            eval $(ssh-agent -s)
+            echo "${{ secrets.SSH_PRIVATE_KEY }}" | ssh-add -
+            mkdir -p ~/.ssh
+            echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+            ssh ubuntu@neiron.solutions 'docker-compose down'
+            ssh ubuntu@neiron.solutions 'docker-compose up'
